@@ -2,11 +2,19 @@ package com.notely.api.notely.dto;
 
 import java.time.LocalDate;
 
+import com.notely.api.notely.entity.AppUser;
+
 public class AppUserDTO {
     private Long uid;
     private String name;
     private String email;
     private LocalDate createdAt;
+
+    public AppUserDTO(){}
+
+    public AppUserDTO(AppUser user) {
+        //TODO Auto-generated constructor stub
+    }
 
     // Getters & Setters
     public Long getUid() { return uid; }
