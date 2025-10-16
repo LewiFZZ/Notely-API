@@ -1,9 +1,17 @@
 package com.notely.api.notely.dto;
 
+import com.notely.api.notely.entity.Category;
+
 public class CategoryDTO {
     private Long id;
     private String name;
     private Long userId;
+
+    public CategoryDTO(){}
+
+    public CategoryDTO(Category category) {
+        //TODO Auto-generated constructor stub
+    }
 
     // Getters & Setters
     public Long getId() { return id; }
