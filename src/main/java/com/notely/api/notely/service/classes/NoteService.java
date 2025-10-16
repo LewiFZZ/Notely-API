@@ -7,21 +7,16 @@ import com.notely.api.notely.dto.AppUserDTO;
 import com.notely.api.notely.dto.CategoryDTO;
 import com.notely.api.notely.dto.NoteDTO;
 import com.notely.api.notely.entity.Note;
-import com.notely.api.notely.repository.AppUserRepository;
-import com.notely.api.notely.repository.CategoryRepository;
 import com.notely.api.notely.repository.NoteRepository;
 import com.notely.api.notely.service.interfaces.NoteServiceI;
 
 public class NoteService implements NoteServiceI{
 
     private final NoteRepository noteRepository;
-    // private final AppUserRepository userRepository;
-    // private final CategoryRepository categoryRepository;
 
-    public NoteService(NoteRepository noteRepository, AppUserRepository userRepository, CategoryRepository categoryRepository){
+
+    public NoteService(NoteRepository noteRepository){
         this.noteRepository = noteRepository;
-        this.userRepository = userRepository;
-        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -42,10 +37,11 @@ public class NoteService implements NoteServiceI{
     public NoteDTO getNoteById(Long id){
 
         try {
-            return noteRepository.findAllById(id).map(this::toDTO).orElse(null);
+            return noteRepository.findById(id).map(this::toDTO).orElse(null);
 
         } catch (Exception e) {
             System.err.println("Error obtaining the desired note with ID" + id +": " + e.getMessage());
+            return null;
         }
     }
 

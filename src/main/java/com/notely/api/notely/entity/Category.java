@@ -32,6 +32,8 @@ public class Category {
     @JoinColumn(name = "user_id")
     private AppUser user;
 
+    private Boolean isActive;
+
     // Getters and Setters
      public Long getId() {
         return id;
@@ -63,6 +65,14 @@ public class Category {
 
     public void SetAppUser(AppUser user) {
         this.user = user;
+    }
+
+    public Boolean getActive(){
+        return isActive;
+    }
+
+    public void setActive(Boolean isActive){
+        this.isActive = isActive;
     }
 
 
