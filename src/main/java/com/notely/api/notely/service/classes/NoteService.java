@@ -3,6 +3,8 @@ package com.notely.api.notely.service.classes;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.notely.api.notely.dto.AppUserDTO;
 import com.notely.api.notely.dto.CategoryDTO;
 import com.notely.api.notely.dto.NoteDTO;
@@ -10,6 +12,7 @@ import com.notely.api.notely.entity.Note;
 import com.notely.api.notely.repository.NoteRepository;
 import com.notely.api.notely.service.interfaces.NoteServiceI;
 
+@Service
 public class NoteService implements NoteServiceI{
 
     private final NoteRepository noteRepository;
