@@ -35,6 +35,8 @@ public class AppUser {
     @JsonBackReference
     private Set<Note> notes;
 
+    private Boolean isActive;
+
 
     // Getters and Setters
     public Long getUid() {
@@ -83,6 +85,14 @@ public class AppUser {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    public Boolean getActive(){
+        return isActive;
+    }
+
+    public void setActive(Boolean isActive){
+        this.isActive = isActive;
     }
 
 }
