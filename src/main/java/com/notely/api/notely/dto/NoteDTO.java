@@ -4,8 +4,8 @@ public class NoteDTO {
     private Long id;
     private String name;
     private String content;
-    private Long categoryId;
-    private Long userId;
+    private CategoryDTO  categoryId;
+    private AppUserDTO  userId;
 
     // Getters & Setters
     public Long getId() { return id; }
@@ -17,9 +17,9 @@ public class NoteDTO {
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
 
-    public Long getCategoryId() { return categoryId; }
-    public void setCategoryId(Long categoryId) { this.categoryId = categoryId; }
+    public CategoryDTO getCategoryId() { return categoryId; }
+    public void setCategoryId(CategoryDTO categoryId) { this.categoryId = categoryId; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
+    public AppUserDTO getUserId() { return userId; }
+    public void setUserId(AppUserDTO userId) { this.userId = userId; }
 }
