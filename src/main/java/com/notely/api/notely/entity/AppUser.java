@@ -3,6 +3,8 @@ package com.notely.api.notely.entity;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 
 // import org.hibernate.annotations.ManyToAny;
@@ -30,6 +32,7 @@ public class AppUser {
 
     // 1:N with Note
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private Set<Note> notes;
 
 

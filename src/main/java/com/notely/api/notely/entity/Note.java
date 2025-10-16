@@ -1,5 +1,7 @@
 package com.notely.api.notely.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,11 +23,13 @@ public class Note {
     // 1:N to Category
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     // 1:N with AppUser
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private AppUser user;
 
     //Setters and Getters
