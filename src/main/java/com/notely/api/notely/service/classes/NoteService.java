@@ -54,8 +54,21 @@ public class NoteService implements NoteServiceI{
         dto.setId(note.getId());
         dto.setName(note.getName());
         dto.setContent(note.getContent());
-        dto.setUserId(new AppUserDTO(note.getUser()));       
-        dto.setCategoryId(new CategoryDTO(note.getCategory()));
+        if (note.getUser() != null) {
+            AppUserDTO userDTO = new AppUserDTO();
+            userDTO.setUid(note.getUser().getUid());
+            userDTO.setName(note.getUser().getName());
+            userDTO.setEmail(note.getUser().getEmail());
+            dto.setUserId(userDTO);
+        }
+
+        if (note.getCategory() != null) {
+            CategoryDTO catDTO = new CategoryDTO();
+            catDTO.setId(note.getCategory().getId());
+            catDTO.setName(note.getCategory().getName());
+            catDTO.setUserId(note.getUser().getUid());
+            dto.setCategoryId(catDTO);
+        }
         return dto;
     }
 
