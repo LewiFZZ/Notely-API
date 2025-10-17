@@ -4,8 +4,8 @@ public class NoteDTO {
     private Long id;
     private String name;
     private String content;
-    private CategoryDTO  categoryId;
-    private AppUserDTO  userId;
+    private CategoryDTO  category;
+    private AppUserDTO  user;
 
 
     public NoteDTO(){}
@@ -20,9 +20,9 @@ public class NoteDTO {
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
 
-    public CategoryDTO getCategoryId() { return categoryId; }
-    public void setCategoryId(CategoryDTO categoryId) { this.categoryId = categoryId; }
+    public CategoryDTO getCategoryId() { return category; }
+    public void setCategoryId(CategoryDTO category) { this.category = category; }
 
-    public AppUserDTO getUserId() { return userId; }
-    public void setUserId(AppUserDTO userId) { this.userId = userId; }
+    public AppUserDTO getUserId() { return user; }
+    public void setUserId(AppUserDTO user) { this.user = user; }
 }
