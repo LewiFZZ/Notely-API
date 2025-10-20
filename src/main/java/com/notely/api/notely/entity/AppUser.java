@@ -6,6 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 
 // import org.hibernate.annotations.ManyToAny;
 
@@ -16,6 +17,7 @@ import jakarta.persistence.Id;
 
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "app_user")
@@ -36,6 +38,9 @@ public class AppUser {
     @OneToMany(mappedBy = "user")
     @JsonBackReference
     private Set<Note> notes;
+
+    @Column(unique = true)
+    private String firebase_auth_uid;
 
     private Boolean isActive;
 
@@ -95,6 +100,14 @@ public class AppUser {
 
     public void setActive(Boolean isActive){
         this.isActive = isActive;
+    }
+
+    public String getFirebaseUid(){
+        return firebase_auth_uid;
+    }
+
+    public void setFirebaseUid(String firebaseuid){
+        this.firebase_auth_uid = firebaseuid;
     }
 
 }
