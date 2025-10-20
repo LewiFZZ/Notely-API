@@ -1,13 +1,17 @@
 package com.notely.api.notely.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "note")
 public class Note {
 
     @Id
@@ -21,12 +25,16 @@ public class Note {
     // 1:N to Category
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     // 1:N with AppUser
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private AppUser user;
+
+    private Boolean isActive;
 
     //Setters and Getters
     public Long getId() {
@@ -67,6 +75,14 @@ public class Note {
 
     public void setUser(AppUser user) {
         this.user = user;
+    }
+
+     public Boolean getActive(){
+        return isActive;
+    }
+
+    public void setActive(Boolean isActive){
+        this.isActive = isActive;
     }
 
 

@@ -2,6 +2,8 @@ package com.notely.api.notely.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,8 +12,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "category")
 public class Category {
 
     @Id
@@ -22,12 +26,15 @@ public class Category {
     
     // 1:N to Note
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private Set<Note> notes;
 
     // 1:N to AppUser
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser user;
+
+    private Boolean isActive;
 
     // Getters and Setters
      public Long getId() {
@@ -60,6 +67,14 @@ public class Category {
 
     public void SetAppUser(AppUser user) {
         this.user = user;
+    }
+
+    public Boolean getActive(){
+        return isActive;
+    }
+
+    public void setActive(Boolean isActive){
+        this.isActive = isActive;
     }
 
 
