@@ -11,11 +11,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import com.notely.api.notely.listener.EncryptionListener;
+
+import com.notely.api.notely.listener.NoteEncryptionListener;
 
 @Entity
 @Table(name = "note")
-@EntityListeners(EncryptionListener.class)
+@EntityListeners(NoteEncryptionListener.class)
 public class Note {
 
     @Id

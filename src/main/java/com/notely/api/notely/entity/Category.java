@@ -15,11 +15,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import com.notely.api.notely.listener.EncryptionListener;
+import com.notely.api.notely.listener.CategoryEncryptionListener;
 
 @Entity
 @Table(name = "category")
-@EntityListeners(EncryptionListener.class)
+@EntityListeners(CategoryEncryptionListener.class)
 public class Category {
 
     @Id
