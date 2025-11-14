@@ -1,12 +1,14 @@
 package com.notely.api.notely.service.classes;
 
-import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.util.Optional;
 
-import com.google.common.base.Optional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
-import com.notely.api.notely.dto.AppUserDTO;
 import com.notely.api.notely.entity.AppUser;
 import com.notely.api.notely.repository.AppUserRepository;
 import com.notely.api.notely.service.interfaces.AuthServiceI;
@@ -21,47 +23,44 @@ public class AuthService implements AuthServiceI{
     }
 
     @Override
-    public Optional authenticate(String idToken) {
+    public Optional<AppUser> authenticate(String idToken) {
         try {
-
             FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
             String firebaseUid = decodedToken.getUid();
             String email = decodedToken.getEmail();
+            String name = decodedToken.getName();
 
             Optional<AppUser> existingUser = appUserRepository.findByFirebaseUid(firebaseUid);
             
             if (existingUser.isPresent()) {
-
-                // El usuario ya existe en tu BD, lo devolvemos
-
                 return existingUser;
-
             } else {
-
-                // 3. El usuario es nuevo (o no existe en tu BD), lo registramos
-
-                return registerNewUserFromFirebase(firebaseUid, email, decodedToken.getName());
-
+                // User doesn't exist, register them
+                return Optional.of(registerNewUserFromFirebase(firebaseUid, email, name));
             }
-
             
         } catch (FirebaseAuthException e) {
-            System.err.println("Error al verificar token de Firebase: " + e.getMessage());
-            return Optional.absent();
-
+            System.err.println("Error verifying Firebase token: " + e.getMessage());
+            return Optional.empty();
         }
     }
 
     @Override
-    public Optional<AppUser> registerNewUserFromFirebase(String firebaseUid, String email, String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'registerNewUserFromFirebase'");
+    @Transactional
+    public AppUser registerNewUserFromFirebase(String firebaseUid, String email, String name) {
+        AppUser newUser = new AppUser();
+        newUser.setFirebaseUid(firebaseUid);
+        newUser.setEmail(email != null ? email : "");
+        newUser.setName(name != null ? name : "");
+        newUser.setCreated_at(LocalDate.now());
+        newUser.setActive(true);
+        
+        return appUserRepository.save(newUser);
     }
 
     @Override
     public Optional<AppUser> findAppUserByFirebaseAuthUid(String firebaseUid) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAppUserByFirebaseAuthUid'");
+        return appUserRepository.findByFirebaseUid(firebaseUid);
     }
 
 }

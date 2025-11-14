@@ -39,7 +39,7 @@ public class AppUser {
     @JsonBackReference
     private Set<Note> notes;
 
-    @Column(unique = true)
+    @Column(name = "firebase_auth_uid", unique = true)
     private String firebase_auth_uid;
 
     private Boolean isActive;
