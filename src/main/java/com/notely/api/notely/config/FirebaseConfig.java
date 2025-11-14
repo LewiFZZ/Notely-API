@@ -17,7 +17,7 @@ import com.google.firebase.FirebaseOptions;
 @Configuration
 public class FirebaseConfig {
 
-    @Value("${firebase.service-account.file:notely-cc9a6-firebase-adminsdk-fbsvc-3cc8a66424.json}")
+    @Value("${firebase.service-account.file:notely-cc9a6-firebase-adminsdk-fbsvc-54ca71e0a3.json}")
     private String firebaseServiceAccountFile;
 
     @Bean
