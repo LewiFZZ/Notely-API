@@ -14,37 +14,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.notely.api.notely.dto.NoteDTO;
-import com.notely.api.notely.service.classes.NoteService;
+import com.notely.api.notely.dto.CategoryDTO;
+import com.notely.api.notely.service.classes.CategoryService;
 
 @RestController
-@RequestMapping("/notes")
-public class NoteController {
+@RequestMapping("/categories")
+public class CategoryController {
 
-    private final NoteService noteService;
+    private final CategoryService categoryService;
 
-    public NoteController(NoteService noteService){
-        this.noteService = noteService;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @GetMapping
-    public ResponseEntity<List<NoteDTO>> getAllNotes() {
+    public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         try {
-            List<NoteDTO> notes = noteService.getAllNotes();
-            return ResponseEntity.ok(notes);
+            List<CategoryDTO> categories = categoryService.getAllCategories();
+            return ResponseEntity.ok(categories);
         } catch (SecurityException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseEntity<NoteDTO> getNoteById(@PathVariable Long id) {
+    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id) {
         try {
-            Optional<NoteDTO> note = noteService.getNoteById(id);
-            if (note.isPresent()) {
-                return ResponseEntity.ok(note.get());
+            Optional<CategoryDTO> category = categoryService.getCategoryById(id);
+            if (category.isPresent()) {
+                return ResponseEntity.ok(category.get());
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -54,25 +54,25 @@ public class NoteController {
             return ResponseEntity.internalServerError().build();
         }
     }
-    
+
     @PostMapping
-    public ResponseEntity<NoteDTO> createNote(@RequestBody NoteDTO noteDTO) {
+    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
         try {
-            NoteDTO createdNote = noteService.createNote(noteDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdNote);
+            CategoryDTO createdCategory = categoryService.createCategory(categoryDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
         } catch (SecurityException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<NoteDTO> updateNote(@PathVariable Long id, @RequestBody NoteDTO noteDTO) {
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDTO) {
         try {
-            Optional<NoteDTO> updatedNote = noteService.updateNote(id, noteDTO);
-            if (updatedNote.isPresent()) {
-                return ResponseEntity.ok(updatedNote.get());
+            Optional<CategoryDTO> updatedCategory = categoryService.updateCategory(id, categoryDTO);
+            if (updatedCategory.isPresent()) {
+                return ResponseEntity.ok(updatedCategory.get());
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -82,11 +82,11 @@ public class NoteController {
             return ResponseEntity.internalServerError().build();
         }
     }
-    
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteNote(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         try {
-            boolean deleted = noteService.deleteNote(id);
+            boolean deleted = categoryService.deleteCategory(id);
             if (deleted) {
                 return ResponseEntity.noContent().build();
             } else {
@@ -99,3 +99,4 @@ public class NoteController {
         }
     }
 }
+

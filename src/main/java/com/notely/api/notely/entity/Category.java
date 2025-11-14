@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,8 +15,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import com.notely.api.notely.listener.EncryptionListener;
+
 @Entity
 @Table(name = "category")
+@EntityListeners(EncryptionListener.class)
 public class Category {
 
     @Id
@@ -61,11 +65,11 @@ public class Category {
         this.notes = notes;
     }
 
-    public AppUser getAppUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void SetAppUser(AppUser user) {
+    public void setUser(AppUser user) {
         this.user = user;
     }
 

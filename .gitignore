@@ -38,3 +38,13 @@ src\main\resources\application.properties
 src/main/resources/application.properties
 
 src/main/java/com/notely/api/notely/config/SecurityConfig.java
+
+src/main/java/com/notely/api/notely/config/notely-cc9a6-firebase-adminsdk-fbsvc-3cc8a66424.json
+
+POSTMAN_TESTING_GUIDE.md
+
+Notely-API-Postman-Collection.json
+
+Notely-API-Complete-Postman-Collection.json
+
+ENCRYPTION_SETUP.md
