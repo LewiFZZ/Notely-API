@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.notely.api.notely.dto.AppUserDTO;
 import com.notely.api.notely.entity.AppUser;
 
 
